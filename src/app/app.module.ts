@@ -65,6 +65,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HttpinterceptorService } from './services/httpinterceptor.service';
 import { PastbookingsComponent } from './components/dashboard/pastbookings/pastbookings.component';
+import { NewfeatureComponent } from './components/dashboard/newfeature/newfeature.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { PastbookingsComponent } from './components/dashboard/pastbookings/pastb
     SearchDetailsComponent,
     LoginComponent,
     SignupComponent,
-    PastbookingsComponent
+    PastbookingsComponent,
+    NewfeatureComponent
   ],
   imports: [
     BrowserModule,

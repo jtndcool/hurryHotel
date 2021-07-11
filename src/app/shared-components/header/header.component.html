@@ -1,51 +1,64 @@
 <header>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-      <div class="container-fluid">
-        <!-- <button
-          class="navbar-toggler"
-          type="button"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#navbarExample01"
-          aria-controls="navbarExample01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars"></i>
-        </button> -->
-       
-        <div class="collapse navbar-collapse" id="navbarExample01">
-           
-              <ul routerLink="/home" class="navbar-nav me-auto mb-2 mb-lg-0" style="cursor: pointer;">
-                <li class="nav-item ">
-                    <!-- <a class="nav-link" aria-current="page" href="#">Home</a> -->
-                    <img src="../../../assets/oyo-logo.svg" style="width:60px; margin: -10px;" />
-                  </li>
-              </ul>  
-          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/contact">Contact Us</a>
-            </li>
-            <mat-divider [vertical]="true"></mat-divider>
-            &nbsp;
-            <li class="nav-item" style="display:flex;">
-             <img src="../../../assets/login.png" style="width:30px; margin: auto;" />
-             <a *ngIf="!userName" class="nav-link" routerLink="/login" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;" href="#">Login/SignUp</a>
-            </li>
-           
-            <li *ngIf="!!userName" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hi {{userName}}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" routerLink="/bookings">My Bookings</a>
-                <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" (click)="logout()">Log Out</a>
-              </div>
-            </li>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container-fluid">
     
-          </ul>
-        </div>
+
+      <div class="collapse navbar-collapse" id="navbarExample01">
+
+        <ul routerLink="/home" class="navbar-nav me-auto mb-2 mb-lg-0" style="cursor: pointer;">
+          <li class="nav-item ">
+            <img class="logo" src="../../../assets/app.png" />
+          </li>
+        </ul>
+
+        <ul class="features navbar-nav me-auto mb-2 mb-lg-0" style="cursor: pointer;">
+       
+          <li class="nav-item " >
+            <a routerLink="/home" routerLinkActive="active" ><i class="fa fa-h-square" aria-hidden="true"></i> Hotels</a>
+          </li>
+
+          <li class="nav-item" routerLink="/flights">
+            <a  ><i  class="fa fa-plane" aria-hidden="true"></i> Flights</a>
+          </li>
+          <li class="nav-item" routerLink="/train" >
+            <a ><i class="fa fa-train" aria-hidden="true"></i> Train</a>
+          </li>
+          <li class="nav-item" routerLink="/cab" >
+            <a ><i class="fa fa-taxi" aria-hidden="true"></i> Cabs</a>
+          </li>
+          <li class="nav-item"  routerLink="/bus">
+            <a><i class="fa fa-bus" aria-hidden="true"></i> Bus</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact">Contact Us</a>
+          </li>
+          <mat-divider [vertical]="true"></mat-divider>
+          &nbsp;
+          <li class="nav-item" style="display:flex;">
+            <img src="../../../assets/login.png" style="width:30px; margin: auto;" />
+            <a *ngIf="!userName" class="nav-link" routerLink="/login"
+              style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;"
+              href="#">Login/SignUp</a>
+          </li>
+
+          <li *ngIf="!!userName" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Hi {{userName}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" routerLink="/bookings">My Bookings</a>
+              <a class="dropdown-item" href="#">My Profile</a>
+              <a class="dropdown-item" (click)="logout()">Log Out</a>
+            </div>
+          </li>
+
+        </ul>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>

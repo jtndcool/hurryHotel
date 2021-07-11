@@ -39,4 +39,9 @@ export class PastbookingsComponent implements OnInit {
     })
   }
 
+  openHotel(hotelId: string){
+    console.log('hotel id', hotelId);
+    this._route.navigate(['/hotel/'+hotelId]);
+  }
+
 }

@@ -1,6 +1,6 @@
 <div class="row">
 
-    
+    <mat-progress-bar *ngIf="isLoading" mode="query"></mat-progress-bar>   
 <simple-notifications [options]="options"></simple-notifications>
     <div class="col-lg-4 img">
         <div class="image-div">
@@ -20,15 +20,15 @@
                        <input matInput placeholder="Coupon" [(ngModel)]="coupon" value="HURRY30">
                      </mat-form-field>
 
-                     <button (click)="applyCoupon()" class="btn-sm">Apply</button>
+                     <button id="couponButton" (click)="applyCoupon()" class="btn-sm">Apply</button>
                </div>
                 <div class="discounts">
                     <h3>Total discounts</h3>
-                    <h4> ₹{{discounts}}</h4>
+                    <h4> ₹{{discounts | number: '1.0-0'}}</h4>
                 </div>
                 <div class="after-disc">
                     <h3>Price After discounts</h3>
-                    <h4>₹{{perDayPrice*2 - discounts}}</h4>
+                    <h4>₹{{(perDayPrice*2 - discounts) | number: '1.0-0' }}</h4>
                 </div>
                 <div class="taxes">
                     <div class="taxes-int"  style="display: flex; align-items: center;">
@@ -43,7 +43,7 @@
 <mat-divider></mat-divider>
                 <div class="total">
                     <h3><b>Pay Now</b></h3>
-                    <h4>₹{{totalPrice}}</h4>
+                    <h4>₹{{totalPrice | number: '1.0-0'}}</h4>
                 </div>
 
                 <div class="book">
@@ -74,11 +74,11 @@
         <h3 style="color: green;">Special Price</h3>
 
         <div class="heading">
-            <h1 class="card-title">₹3400</h1>
+            <h1 class="card-title">₹{{(hotelInfo?.price) | number: '1.0-0'}}</h1>
             &nbsp; &nbsp;
             <h3>
-                <del>₹
-                    5600</del>
+                <del>
+                    ₹{{(hotelInfo?.price*(10/7)) | number: '1.0-0'}}</del>
             </h3>
         </div>
 

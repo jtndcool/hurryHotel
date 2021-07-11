@@ -1,10 +1,7 @@
-import { not } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
-import { NotificationsService, NotificationType } from 'angular2-notifications';
-import { BookingRequest } from 'src/app/models/booking-request';
+import { NotificationsService } from 'angular2-notifications';
 import { hotel } from 'src/app/models/hotel';
 import { LoggedUser } from 'src/app/models/LoggedUser';
 import { CommunicationService } from 'src/app/services/communication.service';
@@ -31,6 +28,7 @@ export class HotelDetailComponent implements OnInit {
   formSearch:NgForm;
   nights:number;
   totalPrice:number;
+  isLoading:boolean = true;
   public options = {
     position: ["bottom", "left"],
     timeOut: 5000,
@@ -47,20 +45,24 @@ export class HotelDetailComponent implements OnInit {
         this.taxes = 0.20*this.totalPrice;
         this.totalPrice = this.totalPrice + this.taxes;
         console.log("toral price",this.totalPrice);
+        this.isLoading = false;
       
+    }, error=>{
+      this.isLoading = false;
     })
   }
   applyCoupon(){
  
     if(this.coupon == 'HURRY30' || this.coupon == 'GETFIRST') {
-      this.discounts = this.totalPrice*0.3;
+      this.discounts = ~~this.totalPrice*0.3;
       this.totalPrice = this.totalPrice - this.discounts;
-      this._notifications.success('Congratulations..!', 'Coupon Applied successfully..You just saved ₹ '+this.discounts, {
+      this._notifications.success('Congratulations..!', 'Coupon Applied successfully..You just saved ₹ '+~~this.discounts, {
         timeOut: 3000,
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true
       });
+      (<HTMLButtonElement>document.getElementById('couponButton')).disabled = true;
     }
  
  else {
@@ -85,13 +87,19 @@ export class HotelDetailComponent implements OnInit {
     bookingRequest['userId'] = loggedUser?.['userId'];
     this._http.bookHotel(bookingRequest).subscribe(data=>{
       console.log('data is booked', data);
-      if(data?.['resultStatus'].status == 'SUCCESS')
-      this._notifications.success('Successfully booked', 'Past bookings can be viewed under My bookings', {
-        timeOut: 3000,
-        showProgressBar: true,
-        pauseOnHover: true,
-        clickToClose: true
-      });
+      if(data?.['resultStatus'].status == 'SUCCESS'){
+        this._notifications.success('Successfully booked', 'Past bookings can be viewed under My bookings', {
+          timeOut: 3000,
+          showProgressBar: true,
+          pauseOnHover: true,
+          clickToClose: true
+        });
+        setTimeout(()=>{
+        this._router.navigate(['/home']);
+        },3500);
+      }
+
+
       else {
         this._notifications.error('Network error', 'Please try again...!', {
           timeOut: 3000,

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { hotel } from 'src/app/models/hotel';
 import { CommunicationService } from 'src/app/services/communication.service';
@@ -15,15 +15,27 @@ export class DashboardComponent implements OnInit {
 
   loading:boolean = false;
   isChildloaded:boolean = false;
-  constructor(private _httpService: HttpserviceService, private _router:Router,private _route:ActivatedRoute,private _communicationService:CommunicationService) { this.isChildloaded=false; }
+  constructor(private _httpService: HttpserviceService, private _router:Router,private _route:ActivatedRoute,private _communicationService:CommunicationService) { 
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {    
+         this.ngOnInit();
+    }});
+
+
+    this.isChildloaded=false;
+   }
 
   ngOnInit(): void {
-    console.log( this._router.url);
+    console.log('ngOninit');
+    console.log( 'fuddi da data',this._router.url);
     if((this._router.url.includes('home') && this._router.url.includes('city')))
         this.isChildloaded=false;
     else if (this._router.url.includes('home'))
       this.isChildloaded=true;    
 
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes')
   }
   searchHotels(){
    

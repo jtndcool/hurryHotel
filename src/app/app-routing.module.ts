@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactComponent } from './components/contact/contact.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HotelDetailComponent } from './components/dashboard/hotel-detail/hotel-detail.component';
+import { NewfeatureComponent } from './components/dashboard/newfeature/newfeature.component';
 import { PastbookingsComponent } from './components/dashboard/pastbookings/pastbookings.component';
 import { SearchDetailsComponent } from './components/dashboard/search-details/search-details.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,7 +24,12 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent } ,
   { path:"login", component:LoginComponent}, 
   { path:"register", component:SignupComponent},
-  { path:"bookings", component:PastbookingsComponent}
+  { path:"bookings", component:PastbookingsComponent},
+  { path:"flights", component:NewfeatureComponent},
+  { path:"cab", component:NewfeatureComponent},
+  { path:"bus", component:NewfeatureComponent},
+  { path:"train", component:NewfeatureComponent},
+  { path:"*", component:DashboardComponent}
 ];
 
 @NgModule({

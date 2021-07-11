@@ -10,14 +10,14 @@
         </div>
     </div>
     <ng-container *ngIf="isData">
-        <div  class="row hoteldetail" style="justify-content:center" *ngFor="let booking of bookingHistoryData">
-            <div class="col-lg-2 image">
+        <div (click)="openHotel(booking?.hotelId)"  class="row hoteldetail" style="justify-content:center" *ngFor="let booking of bookingHistoryData">
+            <div class="col-lg-2 image" style="cursor: pointer;">
               
                     <img src={{booking?.image}}/>
     
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="cursor: pointer;">
               <h1><i class="fa fa-h-square" aria-hidden="true"></i> {{booking?.hotelName}}</h1>
               <h4><i class="fa fa-map-marker" style="color:green; " aria-hidden="true"></i> {{booking?.city}}</h4>
               <h5><i class="fa fa-calendar" aria-hidden="true"></i> <b> {{booking?.dateOfBooking | date: 'MMM d, y'}}</b> -2 days</h5>
@@ -28,7 +28,8 @@
                 <h2><i class="fa fa-id-card-o" aria-hidden="true"></i> ID:HURHO{{booking?.bookingId}}</h2>
             </div>
             <div class="col-lg-2" style="display: flex; flex-direction: column;">
-                <h3 style="font-weight: 600;"><i class="fa fa-check" aria-hidden="true" style="color:green;"></i> Checked Out</h3>
+                <h3 style="font-weight: 600;"><i class="fa fa-check" aria-hidden="true" style="color:green;"></i>Confirmed</h3>
+                
                 <h4>Total Amount: ₹ {{booking?.amount}}</h4>
                 <h4>Pending Amount: ₹0</h4>
                 <h4>Mode: Cash</h4>

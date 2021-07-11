@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 interface City {
   value: string;
@@ -12,7 +13,7 @@ interface City {
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _notificationService: NotificationsService) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,11 @@ export class SearchComponent implements OnInit {
   fromDate: string;
   toDate: string;
   noOfGuests: string;
+  public options = {
+    position: ["bottom", "left"],
+    timeOut: 5000,
+    lastOnBottom: true
+}
 
   cities: City[] = [
     {value: 'Delhi', viewValue: 'Delhi'},
@@ -37,7 +43,36 @@ export class SearchComponent implements OnInit {
   @Output() searchItem = new EventEmitter<NgForm>();
 
   onSearch(form:NgForm){
-    console.log("---------------------------",form);
+    if(form.invalid){ 
+      this._notificationService.error('Error....!', 'Please fill all the inputs before searching', {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+      return;
+    }
+    var today = new Date();  
+    console.log("---------------------------",today,form.value);
+    if(today>form.value.fromDate){
+      this._notificationService.error('Error....!', 'From date cannot be a past day', {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+      return;
+    }
+    if(form.value.toDate<form.value.fromDate){
+      this._notificationService.error('Error....!', 'From date cannot be a greater than To Date', {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+      return;
+    }
+
     this.searchItem.emit(form);
   }
 
