@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"http://localhost:8089"
+  baseUrl:"https://hurryhotels-production.up.railway.app"
   
 };
 
